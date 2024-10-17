@@ -32,8 +32,8 @@ export fn cleanup() void {
     sg.shutdown();
 }
 
-pub fn main() void {
-    sokol.app.run(.{
+export fn sokol_main(_: c_int, _: [*c][*c]c_char) sokol.app.Desc {
+    return .{
         .init_cb = init,
         .frame_cb = frame,
         .cleanup_cb = cleanup,
@@ -43,5 +43,9 @@ pub fn main() void {
         .window_title = "Clear (sokol app)",
         .icon = .{ .sokol_default = true },
         .logger = .{ .func = sokol.log.func },
-    });
+    };
+}
+
+pub fn main() void {
+    sokol.app.run(sokol_main());
 }

@@ -20,9 +20,11 @@ pub fn build(b: *std.Build) void {
             break :blk null;
         }
         const android_tools = android.Tools.create(b, .{
-            .api_level = .android15,
+            // .api_level = .android15,
+            .api_level = .android14, // ${ANDROID_HOME}/platforms/android-34
             .build_tools_version = "35.0.0",
-            .ndk_version = "27.0.12077973",
+            // .ndk_version = "27.0.12077973",
+            .ndk_version = "27.1.12297006",
         });
         const apk = android.APK.create(b, android_tools);
 
@@ -37,17 +39,20 @@ pub fn build(b: *std.Build) void {
     };
 
     for (targets) |target| {
-        var exe: *std.Build.Step.Compile = if (target.result.isAndroid()) b.addSharedLibrary(.{
-            .name = exe_name,
-            .root_source_file = b.path("src/minimal.zig"),
-            .target = target,
-            .optimize = optimize,
-        }) else b.addExecutable(.{
-            .name = exe_name,
-            .root_source_file = b.path("src/minimal.zig"),
-            .target = target,
-            .optimize = optimize,
-        });
+        var exe: *std.Build.Step.Compile = if (target.result.isAndroid())
+            b.addSharedLibrary(.{
+                .name = exe_name,
+                .root_source_file = b.path("src/minimal.zig"),
+                .target = target,
+                .optimize = optimize,
+            })
+        else
+            b.addExecutable(.{
+                .name = exe_name,
+                .root_source_file = b.path("src/minimal.zig"),
+                .target = target,
+                .optimize = optimize,
+            });
 
         // if building as library for Android, add this target
         // NOTE: Android has different CPU targets so you need to build a version of your

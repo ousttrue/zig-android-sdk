@@ -15,6 +15,93 @@ zig build -Dtarget=x86_64-linux-android
 zig build -Dandroid=true
 ```
 
+env
+```sh
+> $env:ANDROID_HOME
+D:\android_sdk
+> ls D:\android_sdk
+.downloadIntermediates  .temp        cmdline-tools  extras    ndk             platforms  system-images
+.knownPackages          build-tools  emulator       licenses  platform-tools  sources
+
+> $env:JAVA_HOME
+D:\Program Files\Android\Android Studio\jbr
+> ls $env:JAVA_HOME
+bin  conf  legal  lib  release
+```
+
+```sh
+cd examples/minimal
+zig build -Dtarget=aarch64-linux-android --summary all
+Build Summary: 19/19 steps succeeded
+install success
+└─ install generated to minimal.apk success
+   └─ zig-android-sdk apksigner success 724ms MaxRSS:5M
+      ├─ zig-android-sdk keytool success 2s MaxRSS:88M
+      └─ zig-android-sdk zipalign success 27ms MaxRSS:4M
+         └─ zig-android-sdk jar (zip compress apk) success 249ms MaxRSS:47M
+            ├─ WriteFile lib\arm64-v8a\libmain.so success
+            │  ├─ zig build-lib minimal Debug aarch64-linux-android success 2s MaxRSS:187M
+            │  │  ├─ options success
+            │  │  ├─ WriteFile android-libc_target-aarch64-linux-android_version-34_ndk-27.1.12297006.conf success
+            │  │  ├─ options success
+            │  │  │  └─ zig-android-sdk builtin_options_update success
+            │  │  │     └─ zig-android-sdk aapt2 dump packagename success 6ms MaxRSS:6M
+            │  │  │        └─ zig-android-sdk aapt2 link success 1s MaxRSS:38M
+            │  │  │           └─ zig-android-sdk aapt2 compile [dir] success 2s MaxRSS:7M
+            │  │  └─ options (+1 more reused dependencies)
+            │  ├─ zig-android-sdk d8 success 1s MaxRSS:5M
+            │  │  ├─ zig-android-sdk d8glob success
+            │  │  │  └─ zig-android-sdk javac success 2s MaxRSS:139M
+            │  │  └─ zig-android-sdk javac (reused)
+            │  ├─ zig-android-sdk aapt2 link (+1 more reused dependencies)
+            │  └─ zig-android-sdk jar (unzip resources.apk) success 162ms MaxRSS:40M
+            │     ├─ zig-android-sdk aapt2 link (+1 more reused dependencies)
+            │     └─ zig-android-sdk aapt2 link (+1 more reused dependencies)
+            └─ WriteFile lib\arm64-v8a\libmain.so (+4 more reused dependencies)
+```
+
+```sh
+cd examples/sdl2
+Build Summary: 26/26 steps succeeded
+install success
+└─ install generated to sdl-zig-demo.apk success
+   └─ zig-android-sdk apksigner success 618ms MaxRSS:5M
+      ├─ zig-android-sdk keytool success 1s MaxRSS:94M
+      └─ zig-android-sdk zipalign success 12ms MaxRSS:4M
+         └─ zig-android-sdk jar (zip compress apk) success 500ms MaxRSS:46M
+            ├─ WriteFile lib\arm64-v8a\libmain.so success
+            │  ├─ zig build-lib sdl-zig-demo Debug aarch64-linux-android success 21s MaxRSS:200M
+            │  │  ├─ zig build-lib SDL2 ReleaseFast aarch64-linux-android success 8s MaxRSS:45M
+            │  │  │  ├─ zig build-lib hidapi ReleaseFast aarch64-linux-android success 23s MaxRSS:154M
+            │  │  │  │  ├─ WriteFile android-libc_target-aarch64-linux-android_version-34_ndk-27.1.12297006.conf cached
+            │  │  │  │  └─ WriteFile android-libc_target-aarch64-linux-android_version-34_ndk-27.1.12297006.conf success
+            │  │  │  ├─ WriteFile cached
+            │  │  │  └─ WriteFile android-libc_target-aarch64-linux-android_version-34_ndk-27.1.12297006.conf cached
+            │  │  ├─ WriteFile cached
+            │  │  ├─ zig build-lib hidapi ReleaseFast aarch64-linux-android (+2 more reused dependencies)
+            │  │  ├─ WriteFile (reused)
+            │  │  ├─ options success
+            │  │  ├─ WriteFile android-libc_target-aarch64-linux-android_version-34_ndk-27.1.12297006.conf cached
+            │  │  ├─ options success
+            │  │  │  └─ zig-android-sdk builtin_options_update success
+            │  │  │     └─ zig-android-sdk aapt2 dump packagename success 12ms MaxRSS:6M
+            │  │  │        └─ zig-android-sdk aapt2 link success 226ms MaxRSS:38M
+            │  │  │           └─ zig-android-sdk aapt2 compile [dir] success 1s MaxRSS:7M
+            │  │  └─ options (+1 more reused dependencies)
+            │  ├─ zig build-lib SDL2 ReleaseFast aarch64-linux-android (+3 more reused dependencies)
+            │  ├─ zig build-lib hidapi ReleaseFast aarch64-linux-android (+2 more reused dependencies)
+            │  ├─ zig build-lib hidapi ReleaseFast aarch64-linux-android (+2 more reused dependencies)
+            │  ├─ zig-android-sdk d8 success 2s MaxRSS:5M
+            │  │  ├─ zig-android-sdk d8glob success
+            │  │  │  └─ zig-android-sdk javac success 1s MaxRSS:223M
+            │  │  └─ zig-android-sdk javac (reused)
+            │  ├─ zig-android-sdk aapt2 link (+1 more reused dependencies)
+            │  └─ zig-android-sdk jar (unzip resources.apk) success 241ms MaxRSS:40M
+            │     ├─ zig-android-sdk aapt2 link (+1 more reused dependencies)
+            │     └─ zig-android-sdk aapt2 link (+1 more reused dependencies)
+            └─ WriteFile lib\arm64-v8a\libmain.so (+7 more reused dependencies)
+```
+
 ```zig
 // This is an overly simplified example to give you the gist
 // of how this library works, see: examples/minimal/build.zig
@@ -35,6 +122,13 @@ pub fn build(b: *std.Build) !void {
         }))
     }
 }
+```
+
+## core function: doInstallApk
+
+```zig
+// src/androidbuild/apk.zig:150-580
+fn doInstallApk(apk: *@This()) std.mem.Allocator.Error!*Step.InstallFile;
 ```
 
 ## Requirements
@@ -68,4 +162,4 @@ Add the following to your build.zig.zon file and run `zig build`.
 ## Credits
 
 - [ikskuh](https://github.com/ikskuh) This would not exist without their [ZigAndroidTemplate](https://github.com/ikskuh/ZigAndroidTemplate) repository to use as a baseline for figuring this all out and also being able to use their logic for the custom panic / logging functions.
-    - ikskuh gave a huge thanks to [@cnlohr](https://github.com/cnlohr) for [rawdrawandroid](https://github.com/cnlohr/rawdrawandroid)
+  - ikskuh gave a huge thanks to [@cnlohr](https://github.com/cnlohr) for [rawdrawandroid](https://github.com/cnlohr/rawdrawandroid)

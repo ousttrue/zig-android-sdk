@@ -113,7 +113,7 @@ pub const APK = struct {
         apk.key_store = key_store;
     }
 
-    fn addLibraryPaths(apk: *@This(), module: *std.Build.Module) void {
+    pub fn addLibraryPaths(apk: *@This(), module: *std.Build.Module) void {
         const b = apk.b;
         const android_ndk_sysroot = apk.tools.ndk_sysroot_path;
 

@@ -347,6 +347,7 @@ pub const APK = struct {
         // - lib/x86/libmain.so
         // - classes.dex
         const apk_files = b.addWriteFiles();
+        const apk_files_not_compressed = b.addWriteFiles();
 
         // Add build artifacts, usually a shared library targetting:
         // - aarch64-linux-android
@@ -487,37 +488,57 @@ pub const APK = struct {
             jar.setCwd(extracted_apk_dir);
             _ = apk_files.addCopyDirectory(extracted_apk_dir, "", .{
                 // Ignore the *.apk that exists in this directory
-                .exclude_extensions = &.{".apk"},
+                .exclude_extensions = &.{ ".apk", "arsc" },
             });
             apk_files.step.dependOn(&jar.step);
+            _ = apk_files_not_compressed.addCopyFile(extracted_apk_dir.path(b, "resources.arsc"), "resources.arsc");
+            apk_files_not_compressed.step.dependOn(&jar.step);
         }
 
         // Create zip via "jar" as it's cross-platform and aapt2 can't zip *.so or *.dex files.
         // - lib/**/*.so
         // - classes.dex
         // - {directory with all resource files like: AndroidManifest.xml, res/values/strings.xml}
+        const jar0 = b.addSystemCommand(&[_][]const u8{
+            apk.tools.java_tools.jar,
+        });
         const zip_file: LazyPath = blk: {
-            const jar = b.addSystemCommand(&[_][]const u8{
-                apk.tools.java_tools.jar,
-            });
-            jar.setName(runNameContext("jar (zip compress apk)"));
+            jar0.setName(runNameContext("jar (zip compress apk)"));
 
             const directory_to_zip = apk_files.getDirectory();
-            jar.setCwd(directory_to_zip);
+            jar0.setCwd(directory_to_zip);
             // NOTE(jae): 2024-09-30
             // Hack to ensure this side-effect re-triggers zipping this up
-            jar.addFileInput(directory_to_zip.path(b, "AndroidManifest.xml"));
+            jar0.addFileInput(directory_to_zip.path(b, "AndroidManifest.xml"));
 
             // -c = compress
             // -f specify filename
             // -M do not include a MANIFEST file
             const compress_zip_arg = "-cfM";
-            if (b.verbose) jar.addArg(compress_zip_arg ++ "v") else jar.addArg(compress_zip_arg);
-            const output_zip_file = jar.addOutputFileArg("compiled_code.zip");
-            jar.addArg(".");
+            if (b.verbose) jar0.addArg(compress_zip_arg ++ "v") else jar0.addArg(compress_zip_arg);
+            const output_zip_file = jar0.addOutputFileArg("compiled_code.zip");
+            jar0.addArg(".");
 
             break :blk output_zip_file;
         };
+
+        const jar1 = b.addSystemCommand(&[_][]const u8{
+            apk.tools.java_tools.jar,
+        });
+        jar1.setName(runNameContext("jar (add non compress apk)"));
+        jar1.step.dependOn(&jar0.step);
+
+        const directory_to_zip = apk_files_not_compressed.getDirectory();
+        jar1.setCwd(directory_to_zip);
+
+        // -u = update archive
+        // -f specify filename
+        // -M do not include a MANIFEST file
+        // -O = not compress
+        const compress_zip_arg = "-ufM0";
+        if (b.verbose) jar1.addArg(compress_zip_arg ++ "v") else jar1.addArg(compress_zip_arg);
+        jar1.addFileArg(zip_file);
+        jar1.addArg(".");
 
         // NOTE(jae): 2024-09-28 - https://github.com/silbinarywolf/zig-android-sdk/issues/8
         // Experimented with using "lint" but it didn't actually catch the issue described
@@ -539,6 +560,7 @@ pub const APK = struct {
                 apk.tools.build_tools.zipalign,
             });
             zipalign.setName(runNameContext("zipalign"));
+            zipalign.step.dependOn(&jar1.step);
 
             // If you use apksigner, zipalign must be used before the APK file has been signed.
             // If you sign your APK using apksigner and make further changes to the APK, its signature is invalidated.

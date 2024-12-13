@@ -20,11 +20,9 @@ pub fn build(b: *std.Build) void {
             break :blk null;
         }
         const android_tools = android.Tools.create(b, .{
-            // .api_level = .android15,
-            .api_level = .android14, // ${ANDROID_HOME}/platforms/android-34
+            .api_level = .android15,
             .build_tools_version = "35.0.0",
-            // .ndk_version = "27.0.12077973",
-            .ndk_version = "27.1.12297006",
+            .ndk_version = "28.0.12674087",
         });
         const apk = android.APK.create(b, android_tools);
 

@@ -196,7 +196,7 @@ pub const Tools = struct {
         }
         const android_sdk_path = path_search.findAndroidSDK(b.allocator) catch |err| switch (err) {
             PathSearch.Error.NoAndroidSdk => {
-                @panic("set ANDROID_HOME environment variable or install AndroidStudio");
+                @panic("set ANDROID_HOME environment");
             },
             else => {
                 @panic(@errorName(err));
@@ -566,6 +566,7 @@ fn getAndroidSDKPath(allocator: std.mem.Allocator) error{OutOfMemory}![]const u8
                 break :blk &[0]u8{};
             };
             if (android_studio_sdk_path.len > 0) {
+                std.debug.print("android_studio_sdk_path: {s}", .{android_studio_sdk_path});
                 return android_studio_sdk_path;
             }
         },

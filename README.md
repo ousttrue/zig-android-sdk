@@ -6,6 +6,31 @@
 
 This library allows you to setup and build an APK for your Android devices. This project was mostly based off the work of [ikskuh](https://github.com/ikskuh) and wouldn't exist without the work they did on the [ZigAndroidTemplate](https://github.com/ikskuh/ZigAndroidTemplate) project.
 
+```sh
+# powershell
+> $env:ANDROID_HOME="$env:USERPROFILE\AppData\Local\Android\Sdk"
+> $env:JDK_HOME="E:\Android\Android Studio\jbr"
+> $env:PATH+=";$env:JAVA_HOME\bin"
+> java --version
+openjdk 21.0.3 2024-04-16
+```
+
+jdk-21 cause
+
+```
+java.lang.IllegalArgumentException: Unsupported class file major version 65
+```
+
+use jdk-17
+
+https://github.com/JetBrains/JetBrainsRuntime/tree/jbr17?tab=readme-ov-file
+
+download `windows-x64	JBRSDK`
+
+```sh
+> java -version
+openjdk version "17.0.11" 2024-04-16
+```
 
 ```sh
 # Target one Android architecture
@@ -16,6 +41,7 @@ zig build -Dandroid=true
 ```
 
 env
+
 ```sh
 > $env:ANDROID_HOME
 D:\android_sdk
@@ -133,11 +159,11 @@ fn doInstallApk(apk: *@This()) std.mem.Allocator.Error!*Step.InstallFile;
 
 ## Requirements
 
-* [Zig](https://ziglang.org/download)
-* Android Tools
-    * Option A: [Android Studio](https://developer.android.com/studio)
-    * Option B: [Android Command Line Tools](https://developer.android.com/studio#command-line-tools-only)
-* [Java Development Kit](https://www.oracle.com/au/java/technologies/downloads/)
+- [Zig](https://ziglang.org/download)
+- Android Tools
+  - Option A: [Android Studio](https://developer.android.com/studio)
+  - Option B: [Android Command Line Tools](https://developer.android.com/studio#command-line-tools-only)
+- [Java Development Kit](https://www.oracle.com/au/java/technologies/downloads/)
 
 ## Installation
 
@@ -156,8 +182,8 @@ Add the following to your build.zig.zon file and run `zig build`.
 
 ## Examples
 
-* [minimal](examples/minimal): This is based off ZigAndroidTemplate's minimal example.
-* [SDL2](examples/sdl2): This is based off Andrew Kelly's SDL Zig Demo but modified to run on Android, Windows, Mac and Linux.
+- [minimal](examples/minimal): This is based off ZigAndroidTemplate's minimal example.
+- [SDL2](examples/sdl2): This is based off Andrew Kelly's SDL Zig Demo but modified to run on Android, Windows, Mac and Linux.
 
 ## Credits
 

@@ -1,0 +1,31 @@
+.{
+    .name = .hello_xr,
+    .version = "0.0.0",
+    .fingerprint = 0xc11e3f7e4fcba9a2,
+    .minimum_zig_version = "0.14.0",
+    .dependencies = .{
+        .openxr = .{
+            .url = "https://github.com/KhronosGroup/OpenXR-SDK/archive/refs/tags/release-1.1.47.zip",
+            .hash = "N-V-__8AAChgPQBumQyb5NDp-w6ysrt8jmJvCnXEyq57Fq4d",
+        },
+        .openxr_loader = .{
+            .path = "../../../openxr_loader",
+        },
+        .directxmath = .{
+            .url = "https://github.com/microsoft/DirectXMath/archive/refs/tags/apr2025.zip",
+            .hash = "N-V-__8AAHRbHgA2IIMZbugitXyHZAZhg4mdnf4C6kiXIvWT",
+        },
+        .compile_commands = .{
+            .url = "https://github.com/the-argus/zig-compile-commands/archive/1a71188d1816cc0741785d4694f790a1106a150a.tar.gz",
+            .hash = "1220fd24e1b2dbdcdd90041c83243277435a3a7d333f42b20b8d165fee27d66096f7",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        // For example...
+        //"LICENSE",
+        //"README.md",
+    },
+}

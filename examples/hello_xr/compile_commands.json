@@ -1,0 +1,154 @@
+[
+	{
+		"arguments": [
+			"clang",
+			"E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\main.cpp",
+			"-o",
+			"C:\\Users\\ousttrue\\AppData\\Local\\zig\\main.cpp.o",
+			"-DWIN32=1",
+			"-DXR_USE_PLATFORM_WIN32=1",
+			"-DXR_USE_GRAPHICS_API_D3D11=1",
+			"-lOle32",
+			"-lopenxr_loader",
+			"-IE:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAChgPQBumQyb5NDp-w6ysrt8jmJvCnXEyq57Fq4d\\include",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAHRbHgA2IIMZbugitXyHZAZhg4mdnf4C6kiXIvWT\\Inc"
+		],
+		"directory": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr",
+		"file": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\main.cpp",
+		"output": "C:\\Users\\ousttrue\\AppData\\Local\\zig\\main.cpp.o"
+	},
+	{
+		"arguments": [
+			"clang",
+			"E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\openxr_program.cpp",
+			"-o",
+			"C:\\Users\\ousttrue\\AppData\\Local\\zig\\openxr_program.cpp.o",
+			"-DWIN32=1",
+			"-DXR_USE_PLATFORM_WIN32=1",
+			"-DXR_USE_GRAPHICS_API_D3D11=1",
+			"-lOle32",
+			"-lopenxr_loader",
+			"-IE:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAChgPQBumQyb5NDp-w6ysrt8jmJvCnXEyq57Fq4d\\include",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAHRbHgA2IIMZbugitXyHZAZhg4mdnf4C6kiXIvWT\\Inc"
+		],
+		"directory": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr",
+		"file": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\openxr_program.cpp",
+		"output": "C:\\Users\\ousttrue\\AppData\\Local\\zig\\openxr_program.cpp.o"
+	},
+	{
+		"arguments": [
+			"clang",
+			"E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\logger.cpp",
+			"-o",
+			"C:\\Users\\ousttrue\\AppData\\Local\\zig\\logger.cpp.o",
+			"-DWIN32=1",
+			"-DXR_USE_PLATFORM_WIN32=1",
+			"-DXR_USE_GRAPHICS_API_D3D11=1",
+			"-lOle32",
+			"-lopenxr_loader",
+			"-IE:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAChgPQBumQyb5NDp-w6ysrt8jmJvCnXEyq57Fq4d\\include",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAHRbHgA2IIMZbugitXyHZAZhg4mdnf4C6kiXIvWT\\Inc"
+		],
+		"directory": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr",
+		"file": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\logger.cpp",
+		"output": "C:\\Users\\ousttrue\\AppData\\Local\\zig\\logger.cpp.o"
+	},
+	{
+		"arguments": [
+			"clang",
+			"E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\platformplugin_factory.cpp",
+			"-o",
+			"C:\\Users\\ousttrue\\AppData\\Local\\zig\\platformplugin_factory.cpp.o",
+			"-DWIN32=1",
+			"-DXR_USE_PLATFORM_WIN32=1",
+			"-DXR_USE_GRAPHICS_API_D3D11=1",
+			"-lOle32",
+			"-lopenxr_loader",
+			"-IE:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAChgPQBumQyb5NDp-w6ysrt8jmJvCnXEyq57Fq4d\\include",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAHRbHgA2IIMZbugitXyHZAZhg4mdnf4C6kiXIvWT\\Inc"
+		],
+		"directory": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr",
+		"file": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\platformplugin_factory.cpp",
+		"output": "C:\\Users\\ousttrue\\AppData\\Local\\zig\\platformplugin_factory.cpp.o"
+	},
+	{
+		"arguments": [
+			"clang",
+			"E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\platformplugin_win32.cpp",
+			"-o",
+			"C:\\Users\\ousttrue\\AppData\\Local\\zig\\platformplugin_win32.cpp.o",
+			"-DWIN32=1",
+			"-DXR_USE_PLATFORM_WIN32=1",
+			"-DXR_USE_GRAPHICS_API_D3D11=1",
+			"-lOle32",
+			"-lopenxr_loader",
+			"-IE:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAChgPQBumQyb5NDp-w6ysrt8jmJvCnXEyq57Fq4d\\include",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAHRbHgA2IIMZbugitXyHZAZhg4mdnf4C6kiXIvWT\\Inc"
+		],
+		"directory": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr",
+		"file": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\platformplugin_win32.cpp",
+		"output": "C:\\Users\\ousttrue\\AppData\\Local\\zig\\platformplugin_win32.cpp.o"
+	},
+	{
+		"arguments": [
+			"clang",
+			"E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\graphicsplugin_factory.cpp",
+			"-o",
+			"C:\\Users\\ousttrue\\AppData\\Local\\zig\\graphicsplugin_factory.cpp.o",
+			"-DWIN32=1",
+			"-DXR_USE_PLATFORM_WIN32=1",
+			"-DXR_USE_GRAPHICS_API_D3D11=1",
+			"-lOle32",
+			"-lopenxr_loader",
+			"-IE:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAChgPQBumQyb5NDp-w6ysrt8jmJvCnXEyq57Fq4d\\include",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAHRbHgA2IIMZbugitXyHZAZhg4mdnf4C6kiXIvWT\\Inc"
+		],
+		"directory": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr",
+		"file": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\graphicsplugin_factory.cpp",
+		"output": "C:\\Users\\ousttrue\\AppData\\Local\\zig\\graphicsplugin_factory.cpp.o"
+	},
+	{
+		"arguments": [
+			"clang",
+			"E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\graphicsplugin_d3d11.cpp",
+			"-o",
+			"C:\\Users\\ousttrue\\AppData\\Local\\zig\\graphicsplugin_d3d11.cpp.o",
+			"-DWIN32=1",
+			"-DXR_USE_PLATFORM_WIN32=1",
+			"-DXR_USE_GRAPHICS_API_D3D11=1",
+			"-lOle32",
+			"-lopenxr_loader",
+			"-IE:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAChgPQBumQyb5NDp-w6ysrt8jmJvCnXEyq57Fq4d\\include",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAHRbHgA2IIMZbugitXyHZAZhg4mdnf4C6kiXIvWT\\Inc"
+		],
+		"directory": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr",
+		"file": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\graphicsplugin_d3d11.cpp",
+		"output": "C:\\Users\\ousttrue\\AppData\\Local\\zig\\graphicsplugin_d3d11.cpp.o"
+	},
+	{
+		"arguments": [
+			"clang",
+			"E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\d3d_common.cpp",
+			"-o",
+			"C:\\Users\\ousttrue\\AppData\\Local\\zig\\d3d_common.cpp.o",
+			"-DWIN32=1",
+			"-DXR_USE_PLATFORM_WIN32=1",
+			"-DXR_USE_GRAPHICS_API_D3D11=1",
+			"-lOle32",
+			"-lopenxr_loader",
+			"-IE:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAChgPQBumQyb5NDp-w6ysrt8jmJvCnXEyq57Fq4d\\include",
+			"-IC:\\Users\\ousttrue\\AppData\\Local\\zig\\p\\N-V-__8AAHRbHgA2IIMZbugitXyHZAZhg4mdnf4C6kiXIvWT\\Inc"
+		],
+		"directory": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr",
+		"file": "E:\\repos\\github.com\\ousttrue\\zig-android-sdk\\examples\\hello_xr\\src\\d3d_common.cpp",
+		"output": "C:\\Users\\ousttrue\\AppData\\Local\\zig\\d3d_common.cpp.o"
+	}
+]

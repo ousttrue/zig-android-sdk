@@ -4,6 +4,9 @@
     .fingerprint = 0xc11e3f7e4fcba9a2,
     .minimum_zig_version = "0.14.0",
     .dependencies = .{
+        .android = .{
+            .path = "../..",
+        },
         .openxr = .{
             .url = "https://github.com/KhronosGroup/OpenXR-SDK/archive/refs/tags/release-1.1.47.zip",
             .hash = "N-V-__8AAChgPQBumQyb5NDp-w6ysrt8jmJvCnXEyq57Fq4d",

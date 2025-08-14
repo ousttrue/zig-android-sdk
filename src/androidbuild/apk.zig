@@ -31,6 +31,12 @@ pub const Resource = union(enum) {
     };
 };
 
+pub const Lib = struct {
+    src: LazyPath,
+    // ex. "lib/arm64-v8a/libVkLayer_khronos_validation.so",
+    dst: []const u8,
+};
+
 b: *std.Build,
 sdk: *Sdk,
 /// Path to Native Development Kit, this includes various C-code headers, libraries, and more.
@@ -47,6 +53,7 @@ android_manifest: ?LazyPath,
 artifacts: std.ArrayListUnmanaged(*Step.Compile),
 java_files: std.ArrayListUnmanaged(LazyPath),
 resources: std.ArrayListUnmanaged(Resource),
+libs: std.ArrayListUnmanaged(Lib),
 
 pub const Options = struct {
     /// ie. "35.0.0"
@@ -92,6 +99,7 @@ pub fn create(sdk: *Sdk, options: Options) *Apk {
         .artifacts = .empty,
         .java_files = .empty,
         .resources = .empty,
+        .libs = .empty,
     };
     return apk;
 }
@@ -113,6 +121,14 @@ pub fn addResourceDirectory(apk: *Apk, dir: LazyPath) void {
         .directory = .{
             .source = dir,
         },
+    }) catch @panic("OOM");
+}
+
+pub fn addLibrary(apk: *Apk, src: LazyPath, dst: []const u8) void {
+    const b = apk.b;
+    apk.libs.append(b.allocator, Lib{
+        .src = src,
+        .dst = dst,
     }) catch @panic("OOM");
 }
 
@@ -500,6 +516,10 @@ fn doInstallApk(apk: *Apk) std.mem.Allocator.Error!*Step.InstallFile {
             // you may get an error like: "unable to find dynamic system library 'c++abi_zig_workaround'"
             apk.applyLibLinkCppWorkaroundIssue19(artifact);
         }
+    }
+
+    for (apk.libs.items) |lib| {
+        _ = apk_files.addCopyFile(lib.src, lib.dst);
     }
 
     // Add *.jar files

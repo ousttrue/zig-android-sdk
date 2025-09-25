@@ -23,14 +23,39 @@ pub fn build(b: *std.Build) void {
     apk.setAndroidManifest(b.path("android/AndroidManifest.xml"));
     apk.addResourceDirectory(b.path("android/res"));
 
-    const exe = b.addSharedLibrary(.{
-        .name = "native-activity",
+    // pub usingnamespace @cImport({
+    //     @cInclude("EGL/egl.h");
+    //     @cInclude("GLES/gl.h");
+    //     @cInclude("android/choreographer.h");
+    //     @cInclude("android/log.h");
+    //     @cInclude("android/sensor.h");
+    //     @cInclude("android/set_abort_message.h");
+    //     @cInclude("android_native_app_glue.h");
+    //     // #include <jni.h>
+    // });
+
+    const t = b.addTranslateC(.{
         .target = target,
         .optimize = optimize,
-        .root_source_file = b.path("src/main.zig"),
-        .link_libc = true,
+        .root_source_file = b.path("src/c.h"),
+    });
+    t.addIncludePath(.{ .cwd_relative = b.fmt("{s}/sources/android/native_app_glue", .{apk.ndk.path}) });
+    // const lib = b.addLibrary(.{
+    //     .root_module = t.createModule(), // module 化 usingnamespace の代替
+    // });
+
+    const exe = b.addLibrary(.{
+        .name = "native-activity",
+        .root_module = b.addModule("native-activity", .{
+            .target = target,
+            .optimize = optimize,
+            .root_source_file = b.path("src/main.zig"),
+            .link_libc = true,
+        }),
+        .linkage = .dynamic,
     });
     b.installArtifact(exe);
+    exe.root_module.addImport("c", t.createModule());
 
     exe.addIncludePath(.{ .cwd_relative = b.fmt("{s}/sources/android/native_app_glue", .{apk.ndk.path}) });
     exe.addCSourceFile(.{

@@ -1,5 +1,5 @@
 const std = @import("std");
-const c = @import("c.zig");
+const c = @import("c");
 
 extern fn call_souce_process(state: *c.android_app, s: *c.android_poll_source) void;
 extern fn get_acceleration(event: *const c.ASensorEvent) [*]const f32;
@@ -131,7 +131,7 @@ const Engine = struct {
         c.AChoreographer_postFrameCallback(c.AChoreographer_getInstance(), &Tick, self);
     }
 
-    fn Tick(_: c_long, data: ?*anyopaque) callconv(.C) void {
+    fn Tick(_: c_long, data: ?*anyopaque) callconv(.c) void {
         CHECK_NOT_NULL(data);
         const engine: *Engine = @ptrCast(@alignCast(data));
         engine.DoTick();
@@ -283,7 +283,7 @@ fn engine_term_display(engine: *Engine) void {
     engine.surface = c.EGL_NO_SURFACE;
 }
 
-fn engine_handle_input(app: [*c]c.android_app, event: ?*c.AInputEvent) callconv(.C) i32 {
+fn engine_handle_input(app: [*c]c.android_app, event: ?*c.AInputEvent) callconv(.c) i32 {
     const t = c.AInputEvent_getType(event);
     std.log.debug("engine_handle_input: event = {}", .{t});
     var engine: *Engine = @ptrCast(@alignCast(app[0].userData));
@@ -295,7 +295,7 @@ fn engine_handle_input(app: [*c]c.android_app, event: ?*c.AInputEvent) callconv(
     return 0;
 }
 
-fn engine_handle_cmd(app: [*c]c.android_app, _cmd: i32) callconv(.C) void {
+fn engine_handle_cmd(app: [*c]c.android_app, _cmd: i32) callconv(.c) void {
     const cmd: AppCmd = @enumFromInt(_cmd);
     std.log.debug("engine_handle_cmd: cmd = {s}", .{@tagName(cmd)});
     const engine: *Engine = @ptrCast(@alignCast(app[0].userData));
@@ -337,7 +337,7 @@ fn engine_handle_cmd(app: [*c]c.android_app, _cmd: i32) callconv(.C) void {
     }
 }
 
-fn OnSensorEvent(fd: c_int, events: c_int, data: ?*anyopaque) callconv(.C) i32 {
+fn OnSensorEvent(fd: c_int, events: c_int, data: ?*anyopaque) callconv(.c) i32 {
     _ = fd;
     _ = events;
 
@@ -366,7 +366,7 @@ fn OnSensorEvent(fd: c_int, events: c_int, data: ?*anyopaque) callconv(.C) i32 {
     return 1;
 }
 
-export fn android_main(state: *c.android_app) callconv(.C) void {
+export fn android_main(state: *c.android_app) callconv(.c) void {
     std.log.info("#### android_main ####", .{});
 
     var engine = Engine{

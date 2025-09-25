@@ -84,7 +84,7 @@ pub fn create(b: *std.Build, options: Options) *Sdk {
     const jdk_path = path_search.findJDK(b.allocator) catch @panic("OOM");
 
     // Validate
-    var errors = std.ArrayList([]const u8).init(b.allocator);
+    var errors = std.array_list.Managed([]const u8).init(b.allocator);
     defer errors.deinit();
 
     if (jdk_path.len == 0) {

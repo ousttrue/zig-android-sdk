@@ -20,7 +20,7 @@ pub const empty: BuildTools = .{
 
 const BuildToolError = Allocator.Error || error{BuildToolFailed};
 
-pub fn init(b: *std.Build, android_sdk_path: []const u8, build_tools_version: []const u8, errors: *std.ArrayList([]const u8)) BuildToolError!BuildTools {
+pub fn init(b: *std.Build, android_sdk_path: []const u8, build_tools_version: []const u8, errors: *std.array_list.Managed([]const u8)) BuildToolError!BuildTools {
     const prev_errors_len = errors.items.len;
 
     // Get build tools path

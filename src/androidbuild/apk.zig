@@ -67,7 +67,7 @@ pub const Options = struct {
 pub fn create(sdk: *Sdk, options: Options) *Apk {
     const b = sdk.b;
 
-    var errors = std.ArrayList([]const u8).init(b.allocator);
+    var errors = std.array_list.Managed([]const u8).init(b.allocator);
     defer errors.deinit();
 
     const build_tools = BuildTools.init(b, sdk.android_sdk_path, options.build_tools_version, &errors) catch |err| switch (err) {
@@ -229,7 +229,7 @@ fn doInstallApk(apk: *Apk) std.mem.Allocator.Error!*Step.InstallFile {
 
     // validate
     {
-        var errors = std.ArrayList([]const u8).init(b.allocator);
+        var errors = std.array_list.Managed([]const u8).init(b.allocator);
         if (key_store.password.len == 0) {
             try errors.append("Keystore not configured with password, must be setup with setKeyStore");
         }

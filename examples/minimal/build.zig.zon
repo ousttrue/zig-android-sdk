@@ -12,4 +12,5 @@
         "src",
     },
     .fingerprint = 0x4037f28ad1eb4832,
+    .zig_minimum_version = "0.15.1",
 }

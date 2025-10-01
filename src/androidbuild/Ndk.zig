@@ -28,7 +28,7 @@ pub const empty: Ndk = .{
 
 const NdkError = Allocator.Error || error{NdkFailed};
 
-pub fn init(b: *std.Build, android_sdk_path: []const u8, ndk_version: []const u8, errors: *std.ArrayList([]const u8)) NdkError!Ndk {
+pub fn init(b: *std.Build, android_sdk_path: []const u8, ndk_version: []const u8, errors: *std.array_list.Managed([]const u8)) NdkError!Ndk {
     // Get NDK path
     // ie. $ANDROID_HOME/ndk/27.0.12077973
     const android_ndk_path = b.fmt("{s}/ndk/{s}", .{ android_sdk_path, ndk_version });
@@ -111,7 +111,7 @@ pub fn init(b: *std.Build, android_sdk_path: []const u8, ndk_version: []const u8
     return ndk;
 }
 
-pub fn validateApiLevel(ndk: *const Ndk, b: *std.Build, api_level: ApiLevel, errors: *std.ArrayList([]const u8)) void {
+pub fn validateApiLevel(ndk: *const Ndk, b: *std.Build, api_level: ApiLevel, errors: *std.array_list.Managed([]const u8)) void {
     if (ndk.android_sdk_path.len == 0 or ndk.sysroot_path.len == 0) {
         @panic("Should not call validateApiLevel if NDK path is not set");
     }
